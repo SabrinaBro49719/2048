@@ -27,8 +27,41 @@ const gameOverSound = document.getElementById('game-over-sound');
 mergeSound.volume = 0.5;
 gameOverSound.volume = 0.5;
 
+// 音频初始化标志
+let audioInitialized = false;
+
+// 初始化音频
+function initializeAudio() {
+    if (!audioInitialized) {
+        // 创建一个静音的音频上下文
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        audioContext.resume();
+        
+        // 预加载音频
+        mergeSound.load();
+        gameOverSound.load();
+        
+        // 尝试播放一个静音的音频来解锁音频上下文
+        const unlockAudio = () => {
+            mergeSound.play().then(() => {
+                mergeSound.pause();
+                audioInitialized = true;
+            }).catch(() => {
+                // 如果播放失败，等待用户交互
+                document.addEventListener('click', unlockAudio, { once: true });
+                document.addEventListener('touchstart', unlockAudio, { once: true });
+            });
+        };
+        
+        unlockAudio();
+    }
+}
+
 // 声音控制
-document.getElementById('music-toggle').addEventListener('click', toggleSound);
+document.getElementById('music-toggle').addEventListener('click', () => {
+    toggleSound();
+    initializeAudio();
+});
 
 function toggleSound() {
     soundEnabled = !soundEnabled;
@@ -38,6 +71,7 @@ function toggleSound() {
 // 播放音效的辅助函数
 function playSound(sound) {
     if (soundEnabled && sound) {
+        initializeAudio();
         sound.currentTime = 0;
         sound.play().catch(e => console.log('Failed to play sound:', e));
     }
@@ -208,6 +242,9 @@ function checkAchievements() {
 
 // 开始新游戏
 function newGame() {
+    // 初始化音频
+    initializeAudio();
+    
     // 清除之前的游戏状态
     if (gameTimer) {
         clearInterval(gameTimer);
