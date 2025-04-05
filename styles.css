@@ -129,7 +129,7 @@ body {
 .cell-128 {
     background-color: #e8ecfc;
     /* 淡蓝色 - 熊猫背景 */
-    background-image: url('image/panda.jpeg');
+    background-image: url('image/squirrel.jpeg');
     background-size: cover;
     background-position: center;
     color: #3a3a5a;
@@ -204,7 +204,7 @@ body {
 .cell-32768 {
     background-color: #d8c8e0;
     /* 淡紫色 - 蝴蝶背景 */
-    background-image: url('image/squirrel.jpeg');
+    background-image: url('image/tiger.jpeg');
     background-size: cover;
     background-position: center;
     color: #3a1a5a;
@@ -214,7 +214,7 @@ body {
 .cell-65536 {
     background-color: #f0c8d8;
     /* 粉色 - 孔雀背景 */
-    background-image: url('image/tiger.jpeg');
+    background-image: url('image/panda.jpeg');
     background-size: cover;
     background-position: center;
     color: #5a1a3a;
