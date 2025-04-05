@@ -16,14 +16,14 @@ let comboCount = 0;
 let lastMergeTime = 0;
 const COMBO_TIMEOUT = 1000; // 1秒内连续合并算连击
 let activeAnimations = new Set(); // 跟踪活动动画
+let touchStartX = 0;
+let touchStartY = 0;
 
 // 音频元素
-const moveSound = document.getElementById('move-sound');
 const mergeSound = document.getElementById('merge-sound');
 const gameOverSound = document.getElementById('game-over-sound');
 
 // 设置音频音量
-moveSound.volume = 0.5;
 mergeSound.volume = 0.5;
 gameOverSound.volume = 0.5;
 
@@ -63,6 +63,64 @@ function initGrid() {
 
     // 初始化数据网格
     grid = Array(GRID_SIZE).fill().map(() => Array(GRID_SIZE).fill(0));
+
+    // 添加触摸事件监听器
+    gridElement.addEventListener('touchstart', handleTouchStart, { passive: true });
+    gridElement.addEventListener('touchmove', handleTouchMove, { passive: true });
+    gridElement.addEventListener('touchend', handleTouchEnd, { passive: true });
+}
+
+// 触摸事件处理函数
+function handleTouchStart(event) {
+    touchStartX = event.touches[0].clientX;
+    touchStartY = event.touches[0].clientY;
+}
+
+function handleTouchMove(event) {
+    if (gameIsOver) return;
+    
+    const touchX = event.touches[0].clientX;
+    const touchY = event.touches[0].clientY;
+    
+    const deltaX = touchX - touchStartX;
+    const deltaY = touchY - touchStartY;
+    
+    // 防止页面滚动
+    if (Math.abs(deltaX) > 10 || Math.abs(deltaY) > 10) {
+        event.preventDefault();
+    }
+}
+
+function handleTouchEnd(event) {
+    if (gameIsOver) return;
+    
+    const touchX = event.changedTouches[0].clientX;
+    const touchY = event.changedTouches[0].clientY;
+    
+    const deltaX = touchX - touchStartX;
+    const deltaY = touchY - touchStartY;
+    
+    // 设置最小滑动距离阈值
+    const minSwipeDistance = 30;
+    
+    // 确定滑动方向
+    if (Math.abs(deltaX) > minSwipeDistance || Math.abs(deltaY) > minSwipeDistance) {
+        if (Math.abs(deltaX) > Math.abs(deltaY)) {
+            // 水平滑动
+            if (deltaX > 0) {
+                move('right');
+            } else {
+                move('left');
+            }
+        } else {
+            // 垂直滑动
+            if (deltaY > 0) {
+                move('down');
+            } else {
+                move('up');
+            }
+        }
+    }
 }
 
 // 1. 更新playScoreAnimation函数来改进特效显示
@@ -344,8 +402,8 @@ function move(direction) {
 
     // 如果发生了移动
     if (moved) {
-        // 播放移动音效
-        playSound(moveSound);
+        // 播放合并音效
+        playSound(mergeSound);
 
         // 更新移动计数
         movesCount++;
@@ -599,38 +657,6 @@ document.addEventListener('keydown', (event) => {
             event.preventDefault();
             move('up');
             break;
-    }
-});
-
-// 添加触摸事件支持
-let touchStartX = 0;
-let touchStartY = 0;
-
-document.addEventListener('touchstart', (event) => {
-    touchStartX = event.touches[0].clientX;
-    touchStartY = event.touches[0].clientY;
-});
-
-document.addEventListener('touchend', (event) => {
-    const touchEndX = event.changedTouches[0].clientX;
-    const touchEndY = event.changedTouches[0].clientY;
-
-    const deltaX = touchEndX - touchStartX;
-    const deltaY = touchEndY - touchStartY;
-
-    // 判断滑动方向
-    if (Math.abs(deltaX) > Math.abs(deltaY)) {
-        if (deltaX > 0) {
-            move('right');
-        } else {
-            move('left');
-        }
-    } else {
-        if (deltaY > 0) {
-            move('down');
-        } else {
-            move('up');
-        }
     }
 });
 

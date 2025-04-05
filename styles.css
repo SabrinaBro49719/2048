@@ -6,33 +6,36 @@ body {
     /* 淡黄色 */
     font-family: 'Comic Sans MS', Arial, sans-serif;
     color: #5a4a5a;
+    margin: 0;
+    padding: 10px;
+    min-height: 100vh;
+    box-sizing: border-box;
 }
 
 .game-container {
     position: relative;
-    margin-top: 2rem;
+    width: 100%;
     max-width: 800px;
     margin: 0 auto;
     background: #FFF8DC;
     /* 淡黄色 */
+    padding: 10px;
+    box-sizing: border-box;
 }
 
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(5, 93px);
-    /* 从6改为5 */
-    grid-template-rows: repeat(5, 93px);
-    /* 从6改为5 */
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
     gap: 8px;
     background: #F0E6C8;
     /* 深一点的淡黄色 */
     padding: 10px;
     border-radius: 12px;
     box-shadow: 0 8px 24px rgba(160, 120, 160, 0.2);
-    width: fit-content;
-    /* 添加这行确保容器宽度适应内容 */
+    width: 100%;
+    aspect-ratio: 1;
     margin: 0 auto;
-    /* 添加这行使容器居中 */
 }
 
 .cell {
@@ -40,7 +43,7 @@ body {
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
-    font-size: 20px;
+    font-size: clamp(14px, 4vw, 20px);
     font-weight: bold;
     color: #5a4a5a;
     transition: all 0.2s ease;
@@ -210,34 +213,36 @@ body {
 .score-panel {
     text-align: center;
     margin: 1rem 0;
-    font-size: 1.5rem;
+    font-size: clamp(1rem, 4vw, 1.5rem);
     color: #5a4a5a;
 }
 
 .scores {
     display: flex;
     justify-content: space-between;
+    width: 100%;
     max-width: 576px;
     margin: 0 auto;
+    gap: 10px;
 }
 
 .score-box {
     background: linear-gradient(145deg, #F0E6C8, #FFF8DC);
-    /* 淡黄色渐变 */
-    padding: 12px 20px;
+    padding: clamp(8px, 2vw, 12px) clamp(12px, 3vw, 20px);
     border-radius: 12px;
     color: #5a4a5a;
     box-shadow: 0 4px 12px rgba(160, 120, 160, 0.2);
+    flex: 1;
 }
 
 .score-title {
-    font-size: 14px;
+    font-size: clamp(12px, 3vw, 14px);
     text-transform: uppercase;
     font-weight: bold;
 }
 
 .score-value {
-    font-size: 24px;
+    font-size: clamp(18px, 5vw, 24px);
     font-weight: bold;
 }
 
@@ -582,4 +587,38 @@ button:disabled {
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     border-bottom: 10px solid white;
+}
+
+/* 移动端优化 */
+@media (max-width: 480px) {
+    .game-container {
+        margin-top: 0;
+        padding: 5px;
+    }
+
+    .grid-container {
+        gap: 4px;
+        padding: 5px;
+    }
+
+    .stats-panel {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .stat-item {
+        flex: 1 1 calc(33.33% - 10px);
+        min-width: 80px;
+    }
+
+    .music-control {
+        width: 40px;
+        height: 40px;
+    }
+
+    .music-icon {
+        width: 24px;
+        height: 24px;
+    }
 }
