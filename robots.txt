@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://game2048.shop/sitemap.xml
