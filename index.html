@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>36宫格2048 - 马卡龙动物版</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="game-container">
+        <div class="score-panel">
+            <h1>2048 game</h1>
+            <div class="scores">
+                <div class="score-box">
+                    <div class="score-title">Current Score</div>
+                    <div class="score-value" id="score">0</div>
+                </div>
+                <div class="score-box">
+                    <div class="score-title">Best Score</div>
+                    <div class="score-value" id="best-score">0</div>
+                </div>
+            </div>
+            <div class="stats-panel">
+                <div class="stat-item">
+                    <div class="stat-value" id="moves-count">0</div>
+                    <div class="stat-label">Moves</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="time-played">00:00</div>
+                    <div class="stat-label">Time</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="highest-tile">0</div>
+                    <div class="stat-label">Highest Tile</div>
+                </div>
+            </div>
+        </div>
+        <div class="control-panel">
+            <button onclick="newGame()">New Game</button>
+        </div>
+        <div class="grid-container" id="grid"></div>
+        <div id="move-notification" class="move-notification">Invalid Move</div>
+        <div class="music-control" id="music-toggle">
+            <svg class="music-icon" viewBox="0 0 24 24" fill="none" stroke="#5a4a5a" stroke-width="2">
+                <path d="M9 18V5l12-2v13"></path>
+                <circle cx="6" cy="18" r="3"></circle>
+                <circle cx="18" cy="16" r="3"></circle>
+            </svg>
+        </div>
+    </div>
+
+    <!-- 添加音效和音乐 -->
+    <audio id="move-sound">
+        <source src="audio/move.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="merge-sound">
+        <source src="audio/merge.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="game-over-sound">
+        <source src="audio/gameover.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="game.js"></script>
+</body>
+
+</html> 
