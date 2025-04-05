@@ -270,6 +270,8 @@ function newGame() {
         gameOverElement.remove();
     }
 
+    // 重置游戏状态
+    grid = Array(GRID_SIZE).fill().map(() => Array(GRID_SIZE).fill(0));
     initGrid();
     score = 0;
     movesCount = 0;
