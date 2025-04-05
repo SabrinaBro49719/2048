@@ -19,34 +19,6 @@ let activeAnimations = new Set(); // 跟踪活动动画
 let touchStartX = 0;
 let touchStartY = 0;
 
-// 预加载图片列表
-const imageUrls = [
-    'image/bunny.jpeg',
-    'image/duck.jpeg',
-    'image/puppy.jpeg',
-    'image/cat.jpeg',
-    'image/otter pup.jpeg',
-    'image/fox.jpeg',
-    'image/panda.jpeg',
-    'image/deer.jpeg',
-    'image/hedgehog.jpeg',
-    'image/alpaca.jpeg',
-    'image/lion.jpeg',
-    'image/elephant.jpeg',
-    'image/lamb.jpeg',
-    'image/bear.jpeg',
-    'image/squirrel.jpeg',
-    'image/tiger.jpeg'
-];
-
-// 预加载图片函数
-function preloadImages() {
-    imageUrls.forEach(url => {
-        const img = new Image();
-        img.src = url;
-    });
-}
-
 // 音频元素
 const mergeSound = document.getElementById('merge-sound');
 const gameOverSound = document.getElementById('game-over-sound');
@@ -284,39 +256,39 @@ function checkAchievements() {
 
 // 开始新游戏
 function newGame() {
-    // 预加载所有图片
-    preloadImages();
+    // 初始化音频
+    initializeAudio();
     
-    // 重置游戏状态
-    grid = Array(GRID_SIZE).fill().map(() => Array(GRID_SIZE).fill(0));
-    score = 0;
-    movesCount = 0;
-    highestTile = 0;
-    gameIsOver = false;
-    comboCount = 0;
-    lastMergeTime = 0;
-    
-    // 更新显示
-    document.getElementById('score').textContent = '0';
-    document.getElementById('moves-count').textContent = '0';
-    document.getElementById('highest-tile').textContent = '0';
-    
-    // 重置计时器
+    // 清除之前的游戏状态
     if (gameTimer) {
         clearInterval(gameTimer);
     }
-    startTime = Date.now();
-    gameTimer = setInterval(updateGameTime, 1000);
-    
-    // 初始化网格
+
+    // 移除游戏结束显示
+    const gameOverElement = document.querySelector('.game-over');
+    if (gameOverElement) {
+        gameOverElement.remove();
+    }
+
     initGrid();
-    
-    // 添加初始方块
-    addNewTile();
-    addNewTile();
-    
-    // 更新显示
-    updateGridUI();
+    score = 0;
+    movesCount = 0;
+    gameIsOver = false;
+    startTime = Date.now();
+    highestTile = 0;
+
+    // 始终使用简单难度 (2个初始方块)
+    let initialTiles = 2;
+
+    for (let i = 0; i < initialTiles; i++) {
+        addNewTile();
+    }
+
+    updateScore();
+    updateStats();
+
+    // 启动游戏计时器
+    gameTimer = setInterval(updateGameTime, 1000);
 }
 
 // 添加新块
