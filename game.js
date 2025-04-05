@@ -65,15 +65,16 @@ function initGrid() {
     grid = Array(GRID_SIZE).fill().map(() => Array(GRID_SIZE).fill(0));
 
     // 添加触摸事件监听器
-    gridElement.addEventListener('touchstart', handleTouchStart, { passive: true });
-    gridElement.addEventListener('touchmove', handleTouchMove, { passive: true });
-    gridElement.addEventListener('touchend', handleTouchEnd, { passive: true });
+    gridElement.addEventListener('touchstart', handleTouchStart, { passive: false });
+    gridElement.addEventListener('touchmove', handleTouchMove, { passive: false });
+    gridElement.addEventListener('touchend', handleTouchEnd, { passive: false });
 }
 
 // 触摸事件处理函数
 function handleTouchStart(event) {
     touchStartX = event.touches[0].clientX;
     touchStartY = event.touches[0].clientY;
+    event.preventDefault(); // 阻止默认行为
 }
 
 function handleTouchMove(event) {
@@ -86,9 +87,7 @@ function handleTouchMove(event) {
     const deltaY = touchY - touchStartY;
     
     // 防止页面滚动
-    if (Math.abs(deltaX) > 10 || Math.abs(deltaY) > 10) {
-        event.preventDefault();
-    }
+    event.preventDefault();
 }
 
 function handleTouchEnd(event) {
@@ -121,6 +120,7 @@ function handleTouchEnd(event) {
             }
         }
     }
+    event.preventDefault(); // 阻止默认行为
 }
 
 // 1. 更新playScoreAnimation函数来改进特效显示

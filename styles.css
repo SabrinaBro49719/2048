@@ -10,6 +10,10 @@ body {
     padding: 10px;
     min-height: 100vh;
     box-sizing: border-box;
+    position: fixed;
+    width: 100%;
+    overflow: hidden;
+    touch-action: none;
 }
 
 .game-container {
@@ -21,6 +25,9 @@ body {
     /* 淡黄色 */
     padding: 10px;
     box-sizing: border-box;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    height: 100vh;
 }
 
 .grid-container {
