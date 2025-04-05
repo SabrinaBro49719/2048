@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>36宫格2048 - 马卡龙动物版</title>
+    <title>2048 game</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -48,6 +48,18 @@
                 <circle cx="6" cy="18" r="3"></circle>
                 <circle cx="18" cy="16" r="3"></circle>
             </svg>
+        </div>
+    </div>
+
+    <!-- 确认对话框 -->
+    <div id="confirm-dialog" class="confirm-dialog">
+        <div class="confirm-content">
+            <h3>确认退出游戏？</h3>
+            <p>您的游戏进度将会丢失</p>
+            <div class="confirm-buttons">
+                <button id="confirm-cancel">取消</button>
+                <button id="confirm-exit">确认退出</button>
+            </div>
         </div>
     </div>
 

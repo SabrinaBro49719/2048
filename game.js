@@ -118,11 +118,38 @@ function initGrid() {
     gridElement.addEventListener('touchend', handleTouchEnd, { passive: false });
 }
 
-// 触摸事件处理函数
+// 确认对话框相关变量
+let isConfirmDialogShown = false;
+let lastTouchStartX = 0;
+let lastTouchStartY = 0;
+const SWIPE_THRESHOLD = 50; // 滑动阈值
+
+// 初始化确认对话框
+function initConfirmDialog() {
+    const dialog = document.getElementById('confirm-dialog');
+    const cancelBtn = document.getElementById('confirm-cancel');
+    const exitBtn = document.getElementById('confirm-exit');
+
+    cancelBtn.addEventListener('click', () => {
+        dialog.classList.remove('show');
+        isConfirmDialogShown = false;
+    });
+
+    exitBtn.addEventListener('click', () => {
+        dialog.classList.remove('show');
+        isConfirmDialogShown = false;
+        // 这里可以添加退出游戏的逻辑
+        window.history.back();
+    });
+}
+
+// 修改触摸事件处理函数
 function handleTouchStart(event) {
-    touchStartX = event.touches[0].clientX;
-    touchStartY = event.touches[0].clientY;
-    event.preventDefault(); // 阻止默认行为
+    lastTouchStartX = event.touches[0].clientX;
+    lastTouchStartY = event.touches[0].clientY;
+    touchStartX = lastTouchStartX;
+    touchStartY = lastTouchStartY;
+    event.preventDefault();
 }
 
 function handleTouchMove(event) {
@@ -131,8 +158,13 @@ function handleTouchMove(event) {
     const touchX = event.touches[0].clientX;
     const touchY = event.touches[0].clientY;
     
-    const deltaX = touchX - touchStartX;
-    const deltaY = touchY - touchStartY;
+    const deltaX = touchX - lastTouchStartX;
+    const deltaY = touchY - lastTouchStartY;
+    
+    // 检测向右滑动
+    if (deltaX > SWIPE_THRESHOLD && Math.abs(deltaY) < Math.abs(deltaX)) {
+        showConfirmDialog();
+    }
     
     // 防止页面滚动
     event.preventDefault();
@@ -168,8 +200,23 @@ function handleTouchEnd(event) {
             }
         }
     }
-    event.preventDefault(); // 阻止默认行为
+    event.preventDefault();
 }
+
+// 显示确认对话框
+function showConfirmDialog() {
+    if (!isConfirmDialogShown) {
+        const dialog = document.getElementById('confirm-dialog');
+        dialog.classList.add('show');
+        isConfirmDialogShown = true;
+    }
+}
+
+// 在页面加载时初始化确认对话框
+document.addEventListener('DOMContentLoaded', () => {
+    initializeAudio();
+    initConfirmDialog();
+});
 
 // 1. 更新playScoreAnimation函数来改进特效显示
 function playScoreAnimation(points, x, y) {
