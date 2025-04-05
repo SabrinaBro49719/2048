@@ -47,7 +47,7 @@ body {
     width: 100%;
     max-width: 500px;
     aspect-ratio: 1;
-    margin: 0.5rem auto;
+    margin: 1rem auto;
 }
 
 .cell {
@@ -224,7 +224,7 @@ body {
 
 .score-panel {
     text-align: center;
-    margin: 0.3rem 0;
+    margin: 0.5rem 0;
     font-size: clamp(0.8rem, 3vw, 1.2rem);
     color: #ffb6c1;
     text-shadow: 1px 1px 2px rgba(255, 182, 193, 0.3);
@@ -237,12 +237,12 @@ body {
     width: 100%;
     max-width: 576px;
     margin: 0 auto;
-    gap: 8px;
+    gap: 12px;
 }
 
 .score-box {
     background: linear-gradient(145deg, #F0E6C8, #FFF8DC);
-    padding: clamp(6px, 1.5vw, 10px) clamp(10px, 2.5vw, 16px);
+    padding: clamp(8px, 2vw, 12px) clamp(12px, 3vw, 20px);
     border-radius: 12px;
     color: #5a4a5a;
     box-shadow: 0 4px 12px rgba(160, 120, 160, 0.2);
@@ -250,26 +250,26 @@ body {
 }
 
 .score-title {
-    font-size: clamp(10px, 2.5vw, 12px);
+    font-size: clamp(12px, 3vw, 14px);
     text-transform: uppercase;
     font-weight: bold;
 }
 
 .score-value {
-    font-size: clamp(16px, 4vw, 20px);
+    font-size: clamp(18px, 5vw, 24px);
     font-weight: bold;
 }
 
 /* 功能按钮 */
 .control-panel {
-    margin: 0.5rem 0;
+    margin: 0.8rem 0;
     display: flex;
     gap: 1rem;
     justify-content: center;
 }
 
 button {
-    padding: 8px 16px;
+    padding: 10px 20px;
     background: linear-gradient(145deg, #F0E6C8, #FFF8DC);
     border: none;
     border-radius: 12px;
@@ -277,7 +277,7 @@ button {
     cursor: pointer;
     transition: all 0.3s;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 16px;
     box-shadow: 0 4px 12px rgba(160, 120, 160, 0.2);
 }
 
@@ -546,8 +546,8 @@ button:disabled {
 .stats-panel {
     display: flex;
     justify-content: space-between;
-    margin: 0.5rem 0;
-    padding: 0.8rem;
+    margin: 0.8rem 0;
+    padding: 1rem;
     background: linear-gradient(145deg, #F0E6C8, #FFF8DC);
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(160, 120, 160, 0.2);
@@ -558,13 +558,13 @@ button:disabled {
 }
 
 .stat-value {
-    font-size: 20px;
+    font-size: 24px;
     font-weight: bold;
     color: #5a4a5a;
 }
 
 .stat-label {
-    font-size: 10px;
+    font-size: 12px;
     color: #5a4a5a;
     text-transform: uppercase;
 }
@@ -609,7 +609,7 @@ button:disabled {
     }
 
     .score-panel {
-        margin: 0.2rem 0;
+        margin: 0.4rem 0;
         font-size: clamp(0.9rem, 3vw, 1.1rem);
         color: #ffb6c1;
         text-shadow: 1px 1px 2px rgba(255, 182, 193, 0.3);
@@ -618,47 +618,47 @@ button:disabled {
     }
 
     .scores {
-        gap: 6px;
+        gap: 8px;
     }
 
     .score-box {
-        padding: 4px 8px;
+        padding: 6px 12px;
     }
 
     .score-title {
-        font-size: clamp(9px, 2vw, 11px);
+        font-size: clamp(10px, 2.5vw, 12px);
     }
 
     .score-value {
-        font-size: clamp(14px, 3.5vw, 18px);
+        font-size: clamp(16px, 4vw, 20px);
     }
 
     .control-panel {
-        margin: 0.3rem 0;
+        margin: 0.6rem 0;
     }
 
     button {
-        padding: 6px 12px;
-        font-size: 13px;
+        padding: 8px 16px;
+        font-size: 15px;
     }
 
     .stats-panel {
-        margin: 0.3rem 0;
-        padding: 0.6rem;
+        margin: 0.6rem 0;
+        padding: 0.8rem;
     }
 
     .stat-value {
-        font-size: 18px;
+        font-size: 20px;
     }
 
     .stat-label {
-        font-size: 9px;
+        font-size: 10px;
     }
 
     .grid-container {
         gap: 4px;
         padding: 5px;
-        margin-top: 0.3rem;
+        margin-top: 0.8rem;
         max-width: 95vw;
     }
 
