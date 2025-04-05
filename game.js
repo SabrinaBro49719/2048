@@ -18,7 +18,6 @@ const COMBO_TIMEOUT = 1000; // 1秒内连续合并算连击
 let activeAnimations = new Set(); // 跟踪活动动画
 let touchStartX = 0;
 let touchStartY = 0;
-let imagesLoaded = false; // 跟踪图片加载状态
 
 // 预加载图片列表
 const imageUrls = [
@@ -42,26 +41,10 @@ const imageUrls = [
 
 // 预加载图片函数
 function preloadImages() {
-    if (imagesLoaded) return; // 如果图片已经加载过，直接返回
-    
-    const loadPromises = imageUrls.map(url => {
-        return new Promise((resolve, reject) => {
-            const img = new Image();
-            img.onload = () => resolve();
-            img.onerror = () => reject(new Error(`Failed to load image: ${url}`));
-            img.src = url;
-        });
+    imageUrls.forEach(url => {
+        const img = new Image();
+        img.src = url;
     });
-
-    // 等待所有图片加载完成
-    Promise.all(loadPromises)
-        .then(() => {
-            imagesLoaded = true;
-            console.log('All images loaded successfully');
-        })
-        .catch(error => {
-            console.error('Error loading images:', error);
-        });
 }
 
 // 音频元素
@@ -122,9 +105,8 @@ function playSound(sound) {
     }
 }
 
-// 在页面加载时就开始预加载图片
+// 在页面加载时初始化音频
 document.addEventListener('DOMContentLoaded', () => {
-    preloadImages();
     initializeAudio();
 });
 
@@ -302,6 +284,9 @@ function checkAchievements() {
 
 // 开始新游戏
 function newGame() {
+    // 预加载所有图片
+    preloadImages();
+    
     // 重置游戏状态
     grid = Array(GRID_SIZE).fill().map(() => Array(GRID_SIZE).fill(0));
     score = 0;
