@@ -224,7 +224,7 @@ body {
 
 .score-panel {
     text-align: center;
-    margin: 0.5rem 0;
+    margin: 0.3rem 0;
     font-size: clamp(0.8rem, 3vw, 1.2rem);
     color: #ffb6c1;
     text-shadow: 1px 1px 2px rgba(255, 182, 193, 0.3);
@@ -237,12 +237,12 @@ body {
     width: 100%;
     max-width: 576px;
     margin: 0 auto;
-    gap: 10px;
+    gap: 8px;
 }
 
 .score-box {
     background: linear-gradient(145deg, #F0E6C8, #FFF8DC);
-    padding: clamp(8px, 2vw, 12px) clamp(12px, 3vw, 20px);
+    padding: clamp(6px, 1.5vw, 10px) clamp(10px, 2.5vw, 16px);
     border-radius: 12px;
     color: #5a4a5a;
     box-shadow: 0 4px 12px rgba(160, 120, 160, 0.2);
@@ -250,35 +250,34 @@ body {
 }
 
 .score-title {
-    font-size: clamp(12px, 3vw, 14px);
+    font-size: clamp(10px, 2.5vw, 12px);
     text-transform: uppercase;
     font-weight: bold;
 }
 
 .score-value {
-    font-size: clamp(18px, 5vw, 24px);
+    font-size: clamp(16px, 4vw, 20px);
     font-weight: bold;
 }
 
 /* 功能按钮 */
 .control-panel {
-    margin: 1rem 0;
+    margin: 0.5rem 0;
     display: flex;
     gap: 1rem;
     justify-content: center;
 }
 
 button {
-    padding: 10px 20px;
+    padding: 8px 16px;
     background: linear-gradient(145deg, #F0E6C8, #FFF8DC);
-    /* 淡黄色渐变 */
     border: none;
     border-radius: 12px;
     color: #5a4a5a;
     cursor: pointer;
     transition: all 0.3s;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 14px;
     box-shadow: 0 4px 12px rgba(160, 120, 160, 0.2);
 }
 
@@ -547,10 +546,9 @@ button:disabled {
 .stats-panel {
     display: flex;
     justify-content: space-between;
-    margin: 1rem 0;
-    padding: 1rem;
+    margin: 0.5rem 0;
+    padding: 0.8rem;
     background: linear-gradient(145deg, #F0E6C8, #FFF8DC);
-    /* 淡黄色渐变 */
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(160, 120, 160, 0.2);
 }
@@ -560,13 +558,13 @@ button:disabled {
 }
 
 .stat-value {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: bold;
     color: #5a4a5a;
 }
 
 .stat-label {
-    font-size: 12px;
+    font-size: 10px;
     color: #5a4a5a;
     text-transform: uppercase;
 }
@@ -611,7 +609,7 @@ button:disabled {
     }
 
     .score-panel {
-        margin: 0.3rem 0;
+        margin: 0.2rem 0;
         font-size: clamp(0.9rem, 3vw, 1.1rem);
         color: #ffb6c1;
         text-shadow: 1px 1px 2px rgba(255, 182, 193, 0.3);
@@ -619,23 +617,49 @@ button:disabled {
         letter-spacing: 0.5px;
     }
 
-    .grid-container {
-        gap: 4px;
-        padding: 5px;
-        margin-top: 0.5rem;
-        max-width: 95vw;
+    .scores {
+        gap: 6px;
+    }
+
+    .score-box {
+        padding: 4px 8px;
+    }
+
+    .score-title {
+        font-size: clamp(9px, 2vw, 11px);
+    }
+
+    .score-value {
+        font-size: clamp(14px, 3.5vw, 18px);
+    }
+
+    .control-panel {
+        margin: 0.3rem 0;
+    }
+
+    button {
+        padding: 6px 12px;
+        font-size: 13px;
     }
 
     .stats-panel {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
-        margin: 0.5rem 0;
+        margin: 0.3rem 0;
+        padding: 0.6rem;
     }
 
-    .stat-item {
-        flex: 1 1 calc(33.33% - 10px);
-        min-width: 80px;
+    .stat-value {
+        font-size: 18px;
+    }
+
+    .stat-label {
+        font-size: 9px;
+    }
+
+    .grid-container {
+        gap: 4px;
+        padding: 5px;
+        margin-top: 0.3rem;
+        max-width: 95vw;
     }
 
     .music-control {
