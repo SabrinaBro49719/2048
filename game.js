@@ -19,6 +19,33 @@ let activeAnimations = new Set(); // 跟踪活动动画
 let touchStartX = 0;
 let touchStartY = 0;
 
+// 预加载图片
+function preloadImages() {
+    const images = [
+        'image/bunny.jpeg',
+        'image/duck.jpeg',
+        'image/puppy.jpeg',
+        'image/cat.jpeg',
+        'image/otter pup.jpeg',
+        'image/fox.jpeg',
+        'image/panda.jpeg',
+        'image/deer.jpeg',
+        'image/hedgehog.jpeg',
+        'image/alpaca.jpeg',
+        'image/lion.jpeg',
+        'image/elephant.jpeg',
+        'image/lamb.jpeg',
+        'image/bear.jpeg',
+        'image/squirrel.jpeg',
+        'image/tiger.jpeg'
+    ];
+
+    images.forEach(src => {
+        const img = new Image();
+        img.src = src;
+    });
+}
+
 // 音频元素
 const mergeSound = document.getElementById('merge-sound');
 const gameOverSound = document.getElementById('game-over-sound');
@@ -76,20 +103,6 @@ function playSound(sound) {
         sound.play().catch(e => console.log('Failed to play sound:', e));
     }
 }
-
-// 在页面加载时初始化音频
-document.addEventListener('DOMContentLoaded', () => {
-    initializeAudio();
-});
-
-// 在用户第一次交互时初始化音频
-document.addEventListener('click', () => {
-    initializeAudio();
-}, { once: true });
-
-document.addEventListener('touchstart', () => {
-    initializeAudio();
-}, { once: true });
 
 // 初始化网格UI
 function initGrid() {
@@ -711,6 +724,12 @@ document.addEventListener('keydown', (event) => {
             move('up');
             break;
     }
+});
+
+// 在页面加载时初始化音频和预加载图片
+document.addEventListener('DOMContentLoaded', () => {
+    initializeAudio();
+    preloadImages();
 });
 
 // 开始新游戏
