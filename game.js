@@ -254,8 +254,34 @@ function checkAchievements() {
     }
 }
 
+// 图片预加载
+const animalImages = {
+    2: 'image/bunny.jpeg',
+    4: 'image/duck.jpeg',
+    8: 'image/puppy.jpeg',
+    16: 'image/cat.jpeg',
+    32: 'image/otter pup.jpeg',
+    64: 'image/fox.jpeg',
+    128: 'image/panda.jpeg',
+    256: 'image/deer.jpeg',
+    512: 'image/hedgehog.jpeg',
+    1024: 'image/alpaca.jpeg',
+    2048: 'image/lion.jpeg'
+};
+
+// 预加载图片
+function preloadImages() {
+    Object.values(animalImages).forEach(imageUrl => {
+        const img = new Image();
+        img.src = imageUrl;
+    });
+}
+
 // 开始新游戏
 function newGame() {
+    // 预加载图片
+    preloadImages();
+    
     // 初始化音频
     initializeAudio();
     
