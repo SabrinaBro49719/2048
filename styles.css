@@ -45,8 +45,9 @@ body {
     border-radius: 12px;
     box-shadow: 0 8px 24px rgba(160, 120, 160, 0.2);
     width: 100%;
+    max-width: 500px;
     aspect-ratio: 1;
-    margin: 0 auto;
+    margin: 0.5rem auto;
 }
 
 .cell {
@@ -223,9 +224,9 @@ body {
 
 .score-panel {
     text-align: center;
-    margin: 1rem 0;
-    font-size: clamp(1rem, 4vw, 1.5rem);
-    color: #5a4a5a;
+    margin: 0.5rem 0;
+    font-size: clamp(0.8rem, 3vw, 1.2rem);
+    color: #ffb6c1;
 }
 
 .scores {
@@ -607,15 +608,24 @@ button:disabled {
         padding: 5px;
     }
 
+    .score-panel {
+        margin: 0.3rem 0;
+        font-size: clamp(0.7rem, 2.5vw, 1rem);
+        color: #ffb6c1;
+    }
+
     .grid-container {
         gap: 4px;
         padding: 5px;
+        margin-top: 0.5rem;
+        max-width: 95vw;
     }
 
     .stats-panel {
         flex-wrap: wrap;
         justify-content: center;
         gap: 10px;
+        margin: 0.5rem 0;
     }
 
     .stat-item {
