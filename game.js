@@ -77,6 +77,20 @@ function playSound(sound) {
     }
 }
 
+// 在页面加载时初始化音频
+document.addEventListener('DOMContentLoaded', () => {
+    initializeAudio();
+});
+
+// 在用户第一次交互时初始化音频
+document.addEventListener('click', () => {
+    initializeAudio();
+}, { once: true });
+
+document.addEventListener('touchstart', () => {
+    initializeAudio();
+}, { once: true });
+
 // 初始化网格UI
 function initGrid() {
     const gridElement = document.getElementById('grid');
