@@ -19,6 +19,7 @@ let activeAnimations = new Set(); // 跟踪活动动画
 let touchStartX = 0;
 let touchStartY = 0;
 let imagesLoaded = false; // 跟踪图片加载状态
+let imageCache = new Map(); // 图片缓存
 
 // 预加载图片列表
 const imageUrls = [
@@ -44,23 +45,71 @@ const imageUrls = [
 function preloadImages() {
     if (imagesLoaded) return; // 如果图片已经加载过，直接返回
     
+    // 创建加载进度显示
+    const loadingOverlay = document.createElement('div');
+    loadingOverlay.className = 'loading-overlay';
+    loadingOverlay.innerHTML = `
+        <div class="loading-content">
+            <div class="loading-text">Loading images...</div>
+            <div class="loading-progress">0/${imageUrls.length}</div>
+        </div>
+    `;
+    document.body.appendChild(loadingOverlay);
+
+    let loadedCount = 0;
+    const totalImages = imageUrls.length;
+
     const loadPromises = imageUrls.map(url => {
         return new Promise((resolve, reject) => {
+            // 检查缓存
+            if (imageCache.has(url)) {
+                loadedCount++;
+                updateLoadingProgress(loadedCount, totalImages);
+                resolve();
+                return;
+            }
+
             const img = new Image();
-            img.onload = () => resolve();
-            img.onerror = () => reject(new Error(`Failed to load image: ${url}`));
+            img.onload = () => {
+                imageCache.set(url, img);
+                loadedCount++;
+                updateLoadingProgress(loadedCount, totalImages);
+                resolve();
+            };
+            img.onerror = (e) => {
+                console.error(`Failed to load image: ${url}`, e);
+                reject(new Error(`Failed to load image: ${url}`));
+            };
             img.src = url;
         });
     });
+
+    // 更新加载进度
+    function updateLoadingProgress(loaded, total) {
+        const progressElement = loadingOverlay.querySelector('.loading-progress');
+        if (progressElement) {
+            progressElement.textContent = `${loaded}/${total}`;
+        }
+    }
 
     // 等待所有图片加载完成
     Promise.all(loadPromises)
         .then(() => {
             imagesLoaded = true;
             console.log('All images loaded successfully');
+            // 移除加载提示
+            document.body.removeChild(loadingOverlay);
+            // 开始游戏
+            newGame();
         })
         .catch(error => {
             console.error('Error loading images:', error);
+            loadingOverlay.innerHTML = `
+                <div class="loading-content">
+                    <div class="loading-text">Failed to load images. Please refresh the page.</div>
+                    <button onclick="location.reload()">Retry</button>
+                </div>
+            `;
         });
 }
 
@@ -121,21 +170,6 @@ function playSound(sound) {
         sound.play().catch(e => console.log('Failed to play sound:', e));
     }
 }
-
-// 在页面加载时就开始预加载图片
-document.addEventListener('DOMContentLoaded', () => {
-    preloadImages();
-    initializeAudio();
-});
-
-// 在用户第一次交互时初始化音频
-document.addEventListener('click', () => {
-    initializeAudio();
-}, { once: true });
-
-document.addEventListener('touchstart', () => {
-    initializeAudio();
-}, { once: true });
 
 // 初始化网格UI
 function initGrid() {
@@ -439,9 +473,41 @@ function updateGridUI() {
             // 设置值到span元素
             const span = cells[cellIndex].querySelector('span');
             span.textContent = value || '';
-            cells[cellIndex].className = value ? `cell cell-${value}` : 'cell';
+            
+            // 使用缓存的图片
+            if (value > 0) {
+                const imageUrl = `image/${getImageName(value)}.jpeg`;
+                cells[cellIndex].style.backgroundImage = `url(${imageUrl})`;
+                cells[cellIndex].className = `cell cell-${value}`;
+            } else {
+                cells[cellIndex].className = 'cell';
+                cells[cellIndex].style.backgroundImage = 'none';
+            }
         }
     }
+}
+
+// 获取图片名称的辅助函数
+function getImageName(value) {
+    const imageMap = {
+        2: 'bunny',
+        4: 'duck',
+        8: 'puppy',
+        16: 'cat',
+        32: 'otter pup',
+        64: 'fox',
+        128: 'panda',
+        256: 'deer',
+        512: 'hedgehog',
+        1024: 'alpaca',
+        2048: 'lion',
+        4096: 'elephant',
+        8192: 'lamb',
+        16384: 'bear',
+        32768: 'squirrel',
+        65536: 'tiger'
+    };
+    return imageMap[value] || '';
 }
 
 // 显示操作无效通知
@@ -752,6 +818,12 @@ document.addEventListener('keydown', (event) => {
             move('up');
             break;
     }
+});
+
+// 在页面加载时就开始预加载图片
+document.addEventListener('DOMContentLoaded', () => {
+    preloadImages();
+    initializeAudio();
 });
 
 // 开始新游戏

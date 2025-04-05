@@ -77,7 +77,7 @@ body {
 .cell-2 {
     background-color: #fce8e8;
     /* 浅粉色 - 兔子背景 */
-    background-image: url('image/bunny.jpeg');
+    background-image: url('./image/bunny.jpeg');
     background-size: cover;
     background-position: center;
 }
@@ -85,7 +85,7 @@ body {
 .cell-4 {
     background-color: #e8fcf8;
     /* 浅绿色 - 鸭子背景 */
-    background-image: url('image/duck.jpeg');
+    background-image: url('./image/duck.jpeg');
     background-size: cover;
     background-position: center;
 }
@@ -93,7 +93,7 @@ body {
 .cell-8 {
     background-color: #fcf8e8;
     /* 浅黄色 - 狗狗背景 */
-    background-image: url('image/puppy.jpeg');
+    background-image: url('./image/puppy.jpeg');
     background-size: cover;
     background-position: center;
     color: #5a4a3a;
@@ -102,7 +102,7 @@ body {
 .cell-16 {
     background-color: #f8e8fc;
     /* 淡紫色 - 猫咪背景 */
-    background-image: url('image/cat.jpeg');
+    background-image: url('./image/cat.jpeg');
     background-size: cover;
     background-position: center;
     color: #4a3a5a;
@@ -111,7 +111,7 @@ body {
 .cell-32 {
     background-color: #e8f8fc;
     /* 浅蓝色 - 企鹅背景 */
-    background-image: url('image/otter pup.jpeg');
+    background-image: url('./image/otter pup.jpeg');
     background-size: cover;
     background-position: center;
     color: #3a4a5a;
@@ -129,7 +129,7 @@ body {
 .cell-128 {
     background-color: #e8ecfc;
     /* 淡蓝色 - 熊猫背景 */
-    background-image: url('image/panda.jpeg');
+    background-image: url('./image/panda.jpeg');
     background-size: cover;
     background-position: center;
     color: #3a3a5a;
@@ -139,7 +139,7 @@ body {
 .cell-256 {
     background-color: #f0fce8;
     /* 淡绿色 - 青蛙背景 */
-    background-image: url('image/deer.jpeg');
+    background-image: url('./image/deer.jpeg');
     background-size: cover;
     background-position: center;
     color: #3a5a2a;
@@ -148,7 +148,7 @@ body {
 .cell-512 {
     background-color: #fce8ec;
     /* 粉红色 - 猪背景 */
-    background-image: url('image/hedgehog.jpeg');
+    background-image: url('./image/hedgehog.jpeg');
     background-size: cover;
     background-position: center;
     color: #5a2a3a;
@@ -157,7 +157,7 @@ body {
 .cell-1024 {
     background-color: #c8e8f0;
     /* 蓝绿色 - 鱼背景 */
-    background-image: url('image/alpaca.jpeg');
+    background-image: url('./image/alpaca.jpeg');
     background-size: cover;
     background-position: center;
     color: #2a3a5a;
@@ -167,7 +167,7 @@ body {
 .cell-2048 {
     background-color: #f8d8c8;
     /* 橙色 - 狮子背景 */
-    background-image: url('image/lion.jpeg');
+    background-image: url('./image/lion.jpeg');
     background-size: cover;
     background-position: center;
     color: #5a2a1a;
@@ -176,7 +176,7 @@ body {
 .cell-4096 {
     background-color: #e8d8f8;
     /* 紫色 - 大象背景 */
-    background-image: url('image/elephant.jpeg');
+    background-image: url('./image/elephant.jpeg');
     background-size: cover;
     background-position: center;
     color: #3a1a5a;
@@ -185,7 +185,7 @@ body {
 .cell-8192 {
     background-color: #c8f8d8;
     /* 薄荷绿 - 变色龙背景 */
-    background-image: url('image/lamb.jpeg');
+    background-image: url('./image/lamb.jpeg');
     background-size: cover;
     background-position: center;
     color: #1a5a3a;
@@ -194,7 +194,7 @@ body {
 .cell-16384 {
     background-color: #f8f8d8;
     /* 淡黄色 - 长颈鹿背景 */
-    background-image: url('image/bear.jpeg');
+    background-image: url('./image/bear.jpeg');
     background-size: cover;
     background-position: center;
     color: #5a5a1a;
@@ -204,7 +204,7 @@ body {
 .cell-32768 {
     background-color: #d8c8e0;
     /* 淡紫色 - 蝴蝶背景 */
-    background-image: url('image/squirrel.jpeg');
+    background-image: url('./image/squirrel.jpeg');
     background-size: cover;
     background-position: center;
     color: #3a1a5a;
@@ -214,7 +214,7 @@ body {
 .cell-65536 {
     background-color: #f0c8d8;
     /* 粉色 - 孔雀背景 */
-    background-image: url('image/tiger.jpeg');
+    background-image: url('./image/tiger.jpeg');
     background-size: cover;
     background-position: center;
     color: #5a1a3a;
@@ -632,4 +632,53 @@ button:disabled {
         width: 24px;
         height: 24px;
     }
+}
+
+/* 添加加载提示样式 */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 248, 220, 0.95);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.loading-content {
+    text-align: center;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(160, 120, 160, 0.3);
+}
+
+.loading-text {
+    font-size: 18px;
+    color: #5a4a5a;
+    margin-bottom: 10px;
+}
+
+.loading-progress {
+    font-size: 16px;
+    color: #5a4a5a;
+}
+
+.loading-content button {
+    margin-top: 15px;
+    padding: 8px 16px;
+    background: linear-gradient(145deg, #F0E6C8, #FFF8DC);
+    border: none;
+    border-radius: 8px;
+    color: #5a4a5a;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.loading-content button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(160, 120, 160, 0.3);
 }
